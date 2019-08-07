@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 
 const Form = ({errors, touched, values, handleSubmit, status}) => {
-
+    
     const [users, setUsers] = useState([]);
     console.log(users);
 
     useEffect(() => {
         if (status) {
-          setUsers([...users, status]);
+          setUsers(users => [...users, status]);
         }
       }, [status]);
 
@@ -31,7 +31,8 @@ const Form = ({errors, touched, values, handleSubmit, status}) => {
 
                 <label>
                     Check to agree to our Terms of Service
-                <Field type="checkbox" name="tos"/> 
+                    <Field type="checkbox" name="tos" checked={values.tos}/> 
+                    <span className="checkbox-span"/>
                 </label>
                 
                 <Field component='select' name='role'>
@@ -39,6 +40,8 @@ const Form = ({errors, touched, values, handleSubmit, status}) => {
                     <option valuer='follower'>Follower</option>
                     <option value='black-sheep'>Black Sheep</option>
                 </Field>
+                {touched.role && errors.role && (<p className="error">{errors.role}</p>)}
+
                 
                 <button type="submit">Submit!</button>
             </Form>
@@ -65,6 +68,7 @@ const FormikForm = withFormik({
         axios
             .post('https://reqres.in/api/users/',values)
             .then(res => {
+                console.log(res.data);
                 setStatus(res.data);
             })
             .catch(err => console.log(err.response));
