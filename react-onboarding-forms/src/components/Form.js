@@ -14,7 +14,7 @@ const FormThang= ({errors, touched, values, handleSubmit, status}) => {
           setUsers(users => [...users, status]);
         }
       }, [status]);
-
+   
     return (
         <div className='form-div'> 
             <h1>Enter a New User</h1>
