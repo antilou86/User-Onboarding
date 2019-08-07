@@ -21,9 +21,14 @@ const Form = ({errors, touched, values, handleSubmit, status}) => {
             <Form>
 
                 <Field type="text" name="name" placeholder="enter name..."/>
+                {touched.name && errors.name && (<p className="error">{errors.name}</p>)}
+
                 <Field type="email" name="email" placeholder="enter email..."/>
+                {touched.email && errors.email && (<p classNaemailme="error">{errors.email}</p>)}
+
                 <Field type="password" name="password" placeholder="enter password..."/>
-                
+                {touched.password && errors.password && (<p className="error">{errors.password}</p>)}
+
                 <label>
                     Check to agree to our Terms of Service
                 <Field type="checkbox" name="tos"/> 
