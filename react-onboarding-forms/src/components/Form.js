@@ -64,7 +64,13 @@ const FormikForm = withFormik({
             })
             .catch(err => console.log(err.response));
     },
-    
+
+    validationSchema: Yup.object().shape({
+        name: Yup.string().required('but who are you though?'),
+        email: Yup.string().required('please provide your email'),
+        password: Yup.string().min(8,'minimum of 8 characters required').required('your password protects you! dont forget to add one.'),
+        tos: Yup.boolean().required('Accept the ToS or forever be denied entry.')
+    })
 
 })(Form);
 
