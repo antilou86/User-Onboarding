@@ -3,10 +3,16 @@ import axios from 'axios';
 import { Form, Field, withFormik } from 'formik';
 import * as Yup from 'yup';
 
-const Form = () => {
+const Form = ({errors, touched, values, handleSubmit, status}) => {
 
     const [users, setUsers] = useState([]);
     console.log(users);
+
+    useEffect(() => {
+        if (status) {
+          setUsers([...users, status]);
+        }
+      }, [status]);
 
     return (
         <div className='form-field'> 
@@ -33,12 +39,33 @@ const Form = () => {
             </Form>
 
             {users.map(user => (
-                <></>
+                <p key={user.id}>{user.name} - {user.email}</p>
             ))}
 
         </div>
     );
 }
 
+const FormikForm = withFormik({
+    mapPropsToValues({name, email, password, tos, role}) {
+        return {
+            name: name || "",
+            email: email || "",
+            password: password || "",
+            tos: tos || false,
+            role: role || "follower"
+        }
+    },
+    handleSubmit(values, {setStatus}) {
+        axios
+            .post('https://reqres.in/api/users/',values)
+            .then(res => {
+                setStatus(res.data);
+            })
+            .catch(err => console.log(err.response));
+    },
+    
+
+})(Form);
 
 export default FormikForm
