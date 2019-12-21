@@ -1,0 +1,43 @@
+h1 {
+    background-color: lightblue;
+    margin: 0 auto;
+    text-align: center;
+    width: 40%;
+    padding: 10px 0;
+}
+
+.form-div {
+    width:100%;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.form-container{
+    width:60%;
+    margin: 0 auto;
+    display: flex;
+    flex-flow: column nowrap;
+    
+}
+
+.text-field {
+    width: 50%;
+    height: 30px;
+    margin:10px auto;
+}
+
+.submit-button{
+    width:20%;
+    margin: 0 auto;
+    height: 40px;
+    border-radius: 10px;
+    background-color: green;
+    color: white;
+    border: none;
+}
+
+.error {
+    color: red;
+    background-color: white;
+    font-size: 10px;
+}
